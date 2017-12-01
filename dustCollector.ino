@@ -41,7 +41,16 @@ if (switchState != lastSwitchState && switchState ==0){
       lcd.print(switchState);
       lastSwitchState = switchState;
       delay(delayOff*1000);
+      onSwitch = analogRead(A0);  
+        if (onSwitch >= 900){
+        switchState = 1;
+        }
+          else {
+          switchState = 0;
+          }
+      if (switchState == 0){
       digitalWrite(2,0);
+      }
 }
   
 dial = analogRead(A1);
@@ -52,7 +61,7 @@ dial = analogRead(A1);
       lcd.setCursor(0, 0);
       lcd.print("Over-Ride: ");
       lcd.setCursor(10, 0);
-	    lcd.print(switchState);
+      lcd.print(switchState);
       lcd.setCursor(0,1);
       lcd.print("Delay:");
       lcd.print(delayOff/60);
